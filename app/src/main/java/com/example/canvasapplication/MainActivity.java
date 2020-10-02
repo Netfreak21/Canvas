@@ -66,14 +66,10 @@ public class MainActivity extends AppCompatActivity {
         layout.setBackground(new BitmapDrawable(bg));
         canvas=new Canvas(bg);
         paint=new Paint(Paint.ANTI_ALIAS_FLAG);
-//        selColor = Color.RED;
         paint.setColor(Color.RED);
         color = Color.RED;
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(50);
-//        mPath=new Path();
-//        path_color_list.add(new Pair<Path, Integer>(mPath,Color.RED));
-//        canvas.drawPath(mPath,paint);
         canvas.drawBitmap(bg,0,0,paint);
     }
     public void clearCanvas(View v) {
@@ -86,16 +82,11 @@ public class MainActivity extends AppCompatActivity {
                 .setOnColorSelectedListener(new OnColorSelectedListener() {
                     @Override
                     public void onColorSelected(int selectedColor) {
-//                        toast("onColorSelected: 0x" + Integer.toHexString(selectedColor));
                     }
                 })
                 .setPositiveButton("ok", new ColorPickerClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
-//                        changeBackgroundColor(selectedColor);
-
-//                        paint.setColor(selectedColor);
-//                        mPath.reset();
                         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
                         layout.invalidate();
                         Toast.makeText(MainActivity.this,path_color_list.size()+"x",Toast.LENGTH_SHORT).show();
@@ -106,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         for (Pair<Path,Integer> path_clr : smudge_color_list ){
                             paint.setColor(path_clr.second);
-//                            paint.setAlpha((0xFF)&(path_clr.second>>24));
                             canvas.drawPath( path_clr.first, paint);
                         }
                         color = selectedColor;
@@ -119,9 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .build()
                 .show();
-//        mPath.reset();
-//        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-//        layout.invalidate();
     }
 
     public static int mixTwoColors( int color1, int color2, float amount )
@@ -184,11 +171,9 @@ public class MainActivity extends AppCompatActivity {
                         alpha -= 10;
                         if(alpha<0)
                             alpha=0;
-//                        mLocalPath.moveTo(coordinate.getStartX(), coordinate.getStartY());
                         coordinate.setStartY(pointY);
                         coordinate.setStartX(pointX);
                         mPath.lineTo(pointX, pointY);
-//                        paint = new Paint();
                         int r = (color >> 16) & mask;
                         int g = (color >> 8) & mask;
                         int b = color & mask;
@@ -200,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case MotionEvent.ACTION_UP:
-//                Toast.makeText(MainActivity.this,previousMPath.toString(),Toast.LENGTH_SHORT).show();
                 if (smudge.getText().toString().equals("Done")&&mPath!=null) {
                     Toast.makeText(MainActivity.this, smudge_color_list.size() + "updated", Toast.LENGTH_SHORT).show();
                 }
@@ -228,13 +212,11 @@ public class MainActivity extends AppCompatActivity {
                     .setOnColorSelectedListener(new OnColorSelectedListener() {
                         @Override
                         public void onColorSelected(int selectedColor) {
-//                        toast("onColorSelected: 0x" + Integer.toHexString(selectedColor));
                         }
                     })
                     .setPositiveButton("ok", new ColorPickerClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
-//
                             selectedColorForSmudge = selectedColor;
                             smudge.setText("Done");
                         }
@@ -259,27 +241,15 @@ public class MainActivity extends AppCompatActivity {
         private float startY;
         private float endY;
 
-        /**
-         * @return the startX
-         */
         public float getStartX() {
             return startX;
         }
-        /**
-         * @param startX the startX to set
-         */
         public void setStartX(float startX) {
             this.startX = startX;
         }
-        /**
-         * @return the endX
-         */
         public float getEndX() {
             return endX;
         }
-        /**
-         * @param endX the endX to set
-         */
         public void setEndX(float endX) {
             this.endX = endX;
         }
